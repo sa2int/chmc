@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="io.bigtreelab.rndbox.api.repository.SignRepository">    
+
+<select id="findUserByCellphone" parameterType="io.bigtreelab.rndbox.api.dto.user.UserSignupRequestDto" 
+	resultType="io.bigtreelab.rndbox.api.domain.user.User"> 
+	/* findByUserId 유저번호 찾기 */
+		SELECT u.user_no, u.nick_name, u.avata, u.gender, u.birthday, u.cellphone
+		  FROM  user u 
+	 WHERE u.cellphone = #{cellphone} AND u.quit_yn = 'N'
+	</select>
+
+	<select id="findUserByUserId" parameterType="io.bigtreelab.rndbox.api.dto.user.UserSignupRequestDto" 
+	resultType="io.bigtreelab.rndbox.api.domain.user.User">  
+	/* findUserByUserId 유저아이디로 회원이 있는지 확인 */
+	SELECT u.user_no, u.nick_name, u.avata, u.gender, u.birthday, u.cellphone, m.member_id as userId
+	  FROM user u   
+	 INNER JOIN member m  ON m.user_no = u.user_no
+	 WHERE m.member_id = #{userId} 
+	   AND m.quit_yn = 'N' 
+	   AND u.quit_yn = 'N'
+	   AND m.join_type = #{joinType}
+ 	 limit 1 
+	</select>
+
+	
+	<select id="findByUserNo" parameterType="Long" resultType="io.bigtreelab.rndbox.api.domain.user.User"> 
+	SELECT u.user_no,
+				u.user_name,
+				u.nick_name,
+				u.avata,
+				u.gender,
+				u.birthday,
+				u.cellphone,
+				u.last_login_date,
+				u.quit_yn,
+				u.sms_allow_yn,
+				u.push_allow_yn
+		 FROM user u 
+	where u.user_no = #{userNo}
+	  and u.quit_yn = 'N'
+	</select>	
+	
+	<select id="findMemberByCellphone" parameterType="io.bigtreelab.rndbox.api.dto.user.UserSignupRequestDto" 
+	resultType="io.bigtreelab.rndbox.api.domain.user.User"> 
+	/* findMemberByCellphone 휴대폰 로그인식 아이디로 회원 찾기 */
+	SELECT u.user_no, u.nick_name, u.avata, u.gender, u.birthday, u.cellphone, m.member_id as userId
+	  FROM user u   
+	 INNER JOIN member m  ON m.user_no = u.user_no
+	 WHERE u.cellphone = #{cellphone} 
+	   AND m.quit_yn = 'N' 
+	   AND u.quit_yn = 'N'
+	   AND m.join_type = #{joinType}
+	limit 1
+	</select>
+	
+	<select id="findUserRoles" parameterType="Long" resultType="String"> 
+	SELECT roles FROM user_roles  WHERE user_no= #{userNo}
+	</select>  
+	
+
+    <insert id="saveMember"  parameterType="io.bigtreelab.rndbox.api.domain.user.User">
+	/* saveMember member 생성 */
+	INSERT INTO member
+		(user_no, member_id,    join_date, join_type, quit_yn,
+		login_fail_num, 
+		created_by, created_date, updated_by, updated_date)
+     VALUES
+		(  #{userNo},  #{userId}, #{joinDate},    #{joinType},	#{quitYn},	
+		 #{loginFailNum}, 
+		  #{createdBy},	#{createdDate},	#{updatedBy},	#{updatedDate}
+		)
+	</insert>  
+		
+	<insert id="saveUser"  parameterType="io.bigtreelab.rndbox.api.domain.user.User">
+	/* saveUser 유저 생성 */
+	INSERT INTO user
+		(cellphone, nick_name, avata, gender, quit_yn,
+		last_login_date, registration_id,
+		created_by, created_date, updated_by, updated_date)
+     VALUES
+		(#{cellphone}, #{nickName}, #{avata}, #{gender},  #{quitYn},
+		#{lastLoginDate}, #{registrationId},
+		  #{createdBy},	#{createdDate},	#{updatedBy}, #{updatedDate}
+		)
+		<selectKey keyProperty="userNo" resultType="long" order="AFTER">
+             SELECT LAST_INSERT_ID()
+        </selectKey>
+	</insert>  
+	
+	<insert id="saveUserRoles"  parameterType="io.bigtreelab.rndbox.api.domain.user.UserRoles" >
+	INSERT INTO user_roles
+		(user_no, roles, created_by, created_date, updated_by, updated_date)
+     VALUES
+		(  #{userNo}, #{role}, #{createdBy},	#{createdDate},	#{updatedBy},	#{updatedDate})
+	</insert>
+
+<!--	<update id="initRegistrationIdInUser" parameterType="io.bigtreelab.rndbox.api.domain.user.User">-->
+<!--		/* initRegistrationId 레지스트레이션 아이디 초기화 */-->
+<!--		UPDATE  user SET registration_id = NULL-->
+<!--		WHERE registration_id = #{registrationId}-->
+<!--	</update>-->
+
+	<update id="initRegistrationId" parameterType="io.bigtreelab.rndbox.api.domain.user.User">
+		/* initRegistrationId 레지스트레이션 아이디 초기화 */
+		UPDATE  user SET registration_id = #{registrationId}
+		WHERE user_no = #{userNo}
+
+
+<!--		UPDATE  user SET registration_id = NULL-->
+<!--		WHERE registration_id = #{registrationId}-->
+	</update>
+	
+	 <update id="updateUserWithLastLoginDate"  parameterType="io.bigtreelab.rndbox.api.domain.user.User">
+	/* updateUserWithLastLoginDate 로그인 시간 수정 */
+	UPDATE  user SET last_login_date = #{lastLoginDate},
+	             registration_id = #{registrationId},
+				updated_by = #{updatedBy},
+				updated_date = #{updatedDate}
+		WHERE user_no = #{userNo}
+	</update>
+
+	<select id="countNickName" resultType="int">
+		/* NickName count */
+		SELECT count(*) FROM nickname_cadidate
+	</select>
+
+	<select id="getNickName" resultType="io.bigtreelab.rndbox.api.domain.user.NickName">
+		/* getNickName  *사용 안함*/
+		SELECT idx, nickname FROM nickname_cadidate WHERE use_yn = 'N' ORDER BY  RAND() limit 1
+	</select>
+
+	<select id="getNickName1" parameterType="int" resultType="io.bigtreelab.rndbox.api.domain.user.NickName">
+	/* getNickName 랜덤수와 동일 혹은 이상의 값 가져오기 */
+	SELECT idx, nickname FROM nickname_cadidate WHERE use_yn = 'N' AND idx >= #{idx} limit 1
+	</select>
+
+	<select id="getNickName2" parameterType="int" resultType="io.bigtreelab.rndbox.api.domain.user.NickName">
+		/* getNickName 최대값 역순으로 가져오기  */
+		SELECT idx, nickname FROM nickname_cadidate WHERE use_yn = 'N' AND idx <![CDATA[<=]]> #{idx} order by idx desc limit 1
+	</select>
+
+	<update id="updateNickNameCadidate"  parameterType="io.bigtreelab.rndbox.api.domain.user.NickName"> 
+	/* updateNickNameCadidate 수정 */
+	UPDATE  nickname_cadidate SET use_yn = 'Y',
+				updated_by = #{updatedBy},
+				updated_date = #{updatedDate}
+		WHERE idx = #{idx}
+	</update>  
+
+	<insert id="saveUserDevice" parameterType="io.bigtreelab.rndbox.api.domain.user.UserDevice">
+		INSERT INTO user_device(
+		user_no,
+		device_model,
+		device_type,
+		os_version,
+		serial_no,
+		del_yn,
+		created_by, created_date, updated_by, updated_date
+		)
+		VALUES(
+		#{userNo},
+		#{deviceModel},
+		#{deviceType},
+		#{osVersion},
+		#{serialNo},
+		#{delYn},
+		#{createdBy},	#{createdDate},	#{updatedBy}, #{updatedDate}
+		)
+
+	</insert>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="io.bigtreelab.rndbox.api.repository.RefreshTokenRepository">    
+	
+	<select id="findByUserNo" parameterType="Long" resultType="io.bigtreelab.rndbox.api.domain.security.RefreshToken"> 
+	SELECT user_no, token FROM refresh_token where user_no = #{userNo} ORDER BY id desc  limit 1
+	</select>
+	
+	
+	<insert id="save"  parameterType="io.bigtreelab.rndbox.api.domain.security.RefreshToken">
+	INSERT INTO refresh_token
+		(user_no, token, created_by, created_date, updated_by, updated_date)
+     VALUES
+		( #{userNo}, #{token}, #{createdBy}, #{createdDate}, #{updatedBy}, #{updatedDate} )
+	</insert>  
+	
+</mapper>

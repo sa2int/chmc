@@ -1,0 +1,174 @@
+greeting: "안녕!@#$"
+
+reqSuccess:
+  code: "1000"
+  msg: "成功" #요청이 정상 처리되었습니다.
+loginFail:
+  code: "1100"
+  msg: "账号或密码不正确" #아이디 또는 비밀번호가 정확하지 않습니다.
+userExist:
+  code: "1101"
+  msg: "手机号码已被绑定" #사용자 ID가 존재합니다.
+userBan:
+  code: "1102"
+  msg: "您的账号已被封" #사용 정지된 ID입니다.
+noLogin:
+  code: "1200"
+  msg: "未登录状态" #로그인이 되지 않은 상태입니다.
+accessDenied:
+  code: "1201"
+  msg: "没有访问权限" #접근 권한이 없습니다.
+expiredJWTToken:
+  code: "1300"
+  msg: "登录失效" #로그인이 만료되었습니다.
+brokenJWTToken:
+  code: "1301"
+  msg: "登录异常" #토큰이 손상되었습니다.
+authError:
+  code: "1200"
+  msg: "账号验证错误" #등록된 ID가 없거나 인증이 완료된 ID입니다.
+authTimeout:
+  code: "1201"
+  msg: "验证超时" #인증 요청 6시간이 지났습니다.
+badParam:
+  code: "1300"
+  msg: "异常报错01" #잘못된 파라미터 입니다.
+success:
+  code: "0"
+  msg: "成功！" #성공하였습니다.
+badRequest:
+  code: "400"
+  msg: "异常报错02" #Bad Request.
+unKnown:
+  code: "-9999"
+  msg: "小星发生了错误，请重试" #알수 없는 오류가 발생하였습니다.
+expiredJwt:
+  code: "-9980"
+  msg: "异常报错04" #잘못된 Jwt 서명입니다.
+securityError:
+  code: "-9981"
+  msg: "异常报错05" #만료된 토큰입니다.
+unsupportedJwt:
+  code: "-9982"
+  msg: "异常报错06" #지원하지 않는 토큰입니다.
+illegalArgument:
+  code: "-9983"
+  msg: "异常报错07" #잘못된 토큰입니다
+userNotFound:
+  code: "-1000"
+  msg: "异常报错08" #존재하지 않는 회원입니다.
+loginFailed:
+  code: "-1001"
+  msg: "未注册过的账号或密码错误" #가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
+userIdSignupFailed:
+  code: "-1002"
+  msg: "已注册账号" #이미 가입된 아이디입니다.
+authenticationEntrypoint:
+  code: "-1003"
+  msg: "没有访问权限" #해당 리소스에 접근하기 위한 권한이 없습니다.
+refreshTokenInValid:
+  code: "-1005"
+  msg: "异常报错09" #리프레쉬 토큰이 잘못되었습니다.
+expiredAccessToken:
+  code: "-1006"
+  msg: "异常报错10" #액세스 토큰이 만료되었습니다.
+communicationException:
+  code: "-1007"
+  msg: "异常报错11" #통신 중 오류가 발생했습니다.
+userExistException:
+  code: "-1008"
+  msg: "已注册账号，请登录" #이미 가입된 계정입니다. 로그인을 해주세요
+agreementException:
+  code: "-1009"
+  msg: "请同意并勾选" #필수동의 항목에 대해 동의가 필요합니다.
+userCellphoneNoParamException:
+  code: "-1010"
+  msg: "需要提供手机号码" #휴대폰 번호가 필요합니다.
+userCellphoneExitsException:
+  code: "-1011"
+  msg: "此号码已被注册" #휴대폰 번호가 있습니다.
+wechatUserExistException:
+  code: "-1020"
+  msg: "请输入正确的账号" #이미 가입된 계정이 있습니다. 정확한 위챗아이디를 입력 해주세요.
+quitUser:
+  code: "-1030"
+  msg: "탈퇴처리된 유저 입니다. 탈퇴를 철회하시겠습니까?"
+cantQuit:
+  code: "-1040"
+  msg: "注销失败！您还不满足注销条件喔~" #마일리지, 배송요청, 인벤토리 등 남아있어 탈퇴 실패
+randomBoxNotOrder:
+  code: "-2000"
+  msg: "别人抢先一步，我们快换个盒子吧>_<" #상품 수량 부족으로 구매를 할 수 없습니다.
+couponPriceException:
+  code: "-2010"
+  msg: "请确认优惠卷的优惠金额" #쿠폰 할인금액을 확인해주세요.
+productPriceException:
+  code: "-2020"
+  msg: "请确认商品总金额" #주문 총금액을 확인해주세요.
+randomBoxNotAccessException:
+  code: "-2030"
+  msg: "别人抢先一步，我们快换个盒子吧>_<" #다른 고객이 구매검토중입니다.
+randomBoxOrdrLackException:
+  code: "-2040"
+  msg: "库存不足" #수량이 부족합니다.
+couponNoExistsException:
+  code: "-2050"
+  msg: "该优惠卷不支持此商品" #사용할 수 없는 쿠폰입니다.
+userInventoryNotProcessException:
+  code: "-2060"
+  msg: "已处理" #이미 처리되었습니다.
+mileageLackException:
+  code: "-2100"
+  msg: "星币不足" #마일리지가 부족합니다.
+wishlistDuplicationException:
+  code: "-2110"
+  msg: "已添加" #이미 등록되었습니다.
+itemHitLackException:
+  code: "-2120"
+  msg: "没有可使用次数了，试试别的道具吧" #사용할 수 있는 힌트 아이템이 없습니다.
+itemShakeLackException:
+  code: "-2130"
+  msg: "没有可使用次数了，试试别的道具吧" #사용할 수 있는 흔들기 아이템이 없습니다.
+itemSeeLackException:
+  code: "-2140"
+  msg: "没有可使用次数了，试试别的道具吧" #사용할 수 있는 투시 아이템이 없습니다.
+userGiftNoExistsException:
+  code: "-2150"
+  msg: "兑换码已失效" #사용할 수 있는 기프트가 아닙니다.
+userGiftExistsException:
+  code: "-2155"
+  msg: "已使用过的兑换码" #이미 보유하고 있는 기프트입니다.
+shippingUserInventoryLackException:
+  code: "-2160"
+  msg: "在邮寄申请里存在不可发送的物品" #출고요청 프로덕트 중 출고 불가한 상품이 있습니다.
+eventAttendanceExistsException:
+  code: "-2170"
+  msg: "今日签到已完成，明天再来吧~" #금일 출석이벤트에 이미 참여하였습니다.
+itemNotUseException:
+  code: "-2180"
+  msg: "此物品无法使用道具" #아이템을 사용할 프라이즈가 없습니다.
+wechatPayOrderCancelException:
+  code: "-2190"
+  msg: "未知错误" #주문취소를 할 수 없습니다.
+productProcessStatusA4:
+  code: "-2200"
+  msg: "小星还在努力补货中~" #품절 입니다
+thisIsBanUser:
+  code: "-2210"
+  msg: "您的账号被限制登录" #밴유저 메세지
+  
+displayPrizeName:
+  word: "抽{0}次"
+package:
+  word: "端盒"
+firstPrizeGift:
+  word: "(前{0}抽中随机)"
+lastPrizeGift:
+  word: "(后{0}抽中随机)"
+displayItemIsMeInfo:
+  word: "나는 {0}입니다."
+displayItemIsNotMeInfo:
+  word: "나는 {0}가 아닙니다."
+  
+
+ 

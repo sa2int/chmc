@@ -1,0 +1,162 @@
+greeting: "안녕!!!!"
+
+reqSuccess:
+  code: "1000"
+  msg: "요청이 정상 처리되었습니다."
+loginFail:
+  code: "1100"
+  msg: "아이디 또는 비밀번호가 정확하지 않습니다."
+userExist:
+  code: "1101"
+  msg: "사용자 ID가 존재합니다."
+userBan:
+  code: "1102"
+  msg: "사용 정지된 ID입니다."
+noLogin:
+  code: "1200"
+  msg: "로그인이 되지 않은 상태입니다."
+accessDenied:
+  code: "1201"
+  msg: "접근 권한이 없습니다."
+expiredJWTToken:
+  code: "1300"
+  msg: "로그인이 만료되었습니다."
+brokenJWTToken:
+  code: "1301"
+  msg: "토큰이 손상되었습니다."
+authError:
+  code: "1200"
+  msg: "등록된 ID가 없거나 인증이 완료된 ID입니다."
+authTimeout:
+  code: "1201"
+  msg: "인증 요청 6시간이 지났습니다."
+badParam:
+  code: "1300"
+  msg: "잘못된 파라미터 입니다."
+success:
+  code: "0"
+  msg: "성공하였습니다."
+badRequest:
+  code: "400"
+  msg: "Bad Request."
+unKnown:
+  code: "-9999"
+  msg: "알수 없는 오류가 발생하였습니다."
+expiredJwt:
+  code: "-9980"
+  msg: "잘못된 Jwt 서명입니다."
+securityError:
+  code: "-9981"
+  msg: "만료된 토큰입니다."
+unsupportedJwt:
+  code: "-9982"
+  msg: "지원하지 않는 토큰입니다."
+illegalArgument:
+  code: "-9983"
+  msg: "잘못된 토큰입니다"
+userNotFound:
+  code: "-1000"
+  msg: "존재하지 않는 회원입니다."
+loginFailed:
+  code: "-1001"
+  msg: "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다."
+userIdSignupFailed:
+  code: "-1002"
+  msg: "이미 가입된 아이디입니다."
+authenticationEntrypoint:
+  code: "-1003"
+  msg: "해당 리소스에 접근하기 위한 권한이 없습니다."
+refreshTokenInValid:
+  code: "-1005"
+  msg: "리프레쉬 토큰이 잘못되었습니다."
+expiredAccessToken:
+  code: "-1006"
+  msg: "액세스 토큰이 만료되었습니다."
+communicationException:
+  code: "-1007"
+  msg: "통신 중 오류가 발생했습니다."
+userExistException:
+  code: "-1008"
+  msg: "이미 가입된 계정입니다. 로그인을 해주세요"
+agreementException:
+  code: "-1009"
+  msg: "필수동의 항목에 대해 동의가 필요합니다."
+userCellphoneNoParamException:
+  code: "-1010"
+  msg: "휴대폰 번호가 필요합니다."
+wechatUserExistException:
+  code: "-1020"
+  msg: "이미 가입된 계정이 있습니다. 정확한 위챗아이디를 입력 해주세요"
+randomBoxNotOrder:
+  code: "-2000"
+  msg: "상품 수량 부족으로 구매를 할 수 없습니다."
+couponPriceException:
+  code: "-2010"
+  msg: "쿠폰 할인금액을 확인해주세요."
+productPriceException:
+  code: "-2020"
+  msg: "주문 총금액을 확인해주세요."
+randomBoxNotAccessException:
+  code: "-2030"
+  msg: "다른 고객이 구매검토중입니다."
+randomBoxOrdrLackException:
+  code: "-2040"
+  msg: "수량이 부족합니다."
+couponNoExistsException:
+  code: "-2050"
+  msg: "사용할 수 없는 쿠폰입니다."
+userInventoryNotProcessException:
+  code: "-2060"
+  msg: "이미 처리되었습니다."
+mileageLackException:
+  code: "-2100"
+  msg: "마일리지가 부족합니다."
+wishlistDuplicationException:
+  code: "-2110"
+  msg: "이미 등록되었습니다."
+itemHitLackException:
+  code: "-2120"
+  msg: "사용할 수 있는 힌트 아이템이 없습니다."
+itemShakeLackException:
+  code: "-2130"
+  msg: "사용할 수 있는 흔들기 아이템이 없습니다."
+itemSeeLackException:
+  code: "-2140"
+  msg: "사용할 수 있는 투시 아이템이 없습니다."
+userGiftNoExistsException:
+  code: "-2150"
+  msg: "사용할 수 있는 기프트가 아닙니다."
+userGiftExistsException:
+  code: "-2155"
+  msg: "이미 보유하고 있는 기프트입니다."
+shippingUserInventoryLackException:
+  code: "-2160"
+  msg: "출고요청 프로덕트 중 출고 불가한 상품이 있습니다"
+eventAttendanceExistsException:
+  code: "-2170"
+  msg: "금일 출석이벤트에 이미 참여하였습니다."
+itemNotUseException:
+  code: "-2180"
+  msg: "아이템을 사용할 프라이즈가 없습니다."
+wechatPayOrderCancelException:
+  code: "-2190"
+  msg: "주문취소를 할 수 없습니다."
+productProcessStatusA4:
+  code: "-2200"
+  msg: "품절 입니다" #품절 입니다
+
+displayPrizeName:
+  word: "抽{0}次"
+package:
+  word: "端盒"
+firstPrizeGift:
+  word: "(前{0}抽中随机)"
+lastPrizeGift:
+  word: "(后{0}抽中随机)"
+displayItemIsMeInfo:
+  word: "나는 {0}입니다."
+displayItemIsNotMeInfo:
+  word: "나는 {0}가 아닙니다."
+  
+
+ 

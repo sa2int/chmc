@@ -1,0 +1,85 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+group = 'io.bigtreelab.rndbox'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+    // 다국어 제공을 위한 i18n을 yml 파일로 적용하기 위한 의존성
+	implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// API 문서 자동화 swagger 2
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+	//swagger2 오류로 추가시작  
+	implementation("io.swagger:swagger-annotations:1.5.21")
+	implementation("io.swagger:swagger-models:1.5.21")
+
+	// spring security 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+	//MyBatis 로그
+	implementation group: 'org.bgee.log4jdbc-log4j2', name:'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+
+	// slf4j & logback
+     implementation('org.slf4j:jcl-over-slf4j')
+     implementation('ch.qos.logback:logback-classic')
+
+	//JSR-310 지원, LocalDateTime 처리
+    implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.2'
+
+   //SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder
+	implementation 'io.codearte.jfairy:jfairy:0.5.9'
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
+
+	//NoClassDefFoundError - jwtTokenProvider
+	implementation 'javax.xml.bind:jaxb-api'
+	implementation 'org.glassfish.jaxb:jaxb-runtime'
+	implementation 'javax.activation:activation:1.1.1'
+
+	testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+	//	JPA & querydsl
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation('com.querydsl:querydsl-jpa')
+
+		//thymeleaf
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+		implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

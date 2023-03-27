@@ -1,0 +1,8 @@
+greeting: "Hello"
+
+reqSuccess:
+  code: "1000"
+  msg: "The request has been processed"
+badParam:
+  code: "1300"
+  msg: "Bad parameters"
