@@ -1,33 +1,20 @@
-public int sol(int[][] board, int[] moves) {
-
+    public int sol(int[][] board, int[] moves) {
         int answer = 0;
         Stack<Integer> stack = new Stack<>();
-
-        int a = 0;
+        
         for (int i = 0; i < moves.length; i++) {
-
             for (int j = 0; j < board.length; j++) {
-
                 if(board[j][moves[i]-1] != 0) {
-
-                    stack.push(board[j][moves[i]-1]);
-
-                    if(a == board[j][moves[i]-1]) {
-                        while(stack.pop() == stack.peek()) {
+                    int tmp = board[j][moves[i]-1];
+                    if(!stack.isEmpty() && tmp == stack.peek()) {
                             answer+=2;
-                        }
+                            stack.pop();
                     }
-
-                    a = stack.peek();
+                    else stack.push(board[j][moves[i]-1]);
                     board[j][moves[i]-1] = 0;
-                    System.out.println("stack1:"+stack);
                     break;
                 }
             }
-            System.out.println("-------------");
         }
-
-
-
         return answer;
     }
