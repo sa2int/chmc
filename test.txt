@@ -11,3 +11,23 @@
         if(!stack.empty()) return "NO";
         return answer;
     }
+
+
+        String a = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+
+public String sol(String a) {
+        String answer = "";
+        Stack<Character> stack = new Stack<>();
+        for(char x : a.toCharArray()) {
+            if(x == ')') {
+                while(stack.pop() != '(') {
+                }
+            } else {
+                stack.push(x);
+            }
+        }
+        for(int i=0; i<stack.size();i++) {
+            answer+=stack.get(i);
+        }
+        return answer;
+    }
