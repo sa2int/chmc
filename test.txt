@@ -1,12 +1,13 @@
-    public int sol(int a, int b) {
-        int answer = 0;
-        Queue<Integer> q = new LinkedList<>();
-        
-        for (int i = 1; i <= a; i++) q.offer(i);
-        while(!q.isEmpty()) {
-            for (int j = 0; j < b; j++) q.offer(q.poll());
-            q.poll();
-            if(q.size() == 1) answer=q.poll();
+    public String solution(String need, String plan) {
+        String answer = "YES";
+        Queue<Character> q = new LinkedList<>();
+
+        for (char x : need.toCharArray()) q.offer(x);
+        for(char x : plan.toCharArray()) {
+            if(q.contains(x)) {
+                if(x != q.poll()) return "NO";
+            }
+            if(!q.isEmpty()) return "NO";
         }
         return answer;
     }
