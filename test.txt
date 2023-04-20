@@ -1,13 +1,12 @@
-    public int sol(String str) {
+    public int sol(int a, int b) {
         int answer = 0;
-        Stack<Character> stack = new Stack<>();
-        for (int i=0; i < str.length(); i++) {
-            if(str.charAt(i) == '(')stack.push('(');
-            else {
-                stack.pop();
-                if(str.charAt(i-1) == '(')  answer += stack.size();
-                else answer++;
-            }
+        Queue<Integer> q = new LinkedList<>();
+        
+        for (int i = 1; i <= a; i++) q.offer(i);
+        while(!q.isEmpty()) {
+            for (int j = 0; j < b; j++) q.offer(q.poll());
+            q.poll();
+            if(q.size() == 1) answer=q.poll();
         }
         return answer;
     }
