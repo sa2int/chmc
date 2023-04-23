@@ -28,12 +28,12 @@ public class MdDto {
 
     @Getter
     @AllArgsConstructor
-    public static class  MdResponse {
+    public static class  Response {
         private int mdId;
         private int categoryId;
         private int colorId;
 
-            public MdResponse(Md entity) {
+            public Response(Md entity) {
             this.mdId = entity.getMdId();
             this.categoryId = entity.getCategoryId();
             this.colorId = entity.getColorId();

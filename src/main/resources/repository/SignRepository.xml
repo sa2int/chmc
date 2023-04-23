@@ -22,7 +22,6 @@
 	   AND m.join_type = #{joinType}
  	 limit 1 
 	</select>
-
 	
 	<select id="findByUserNo" parameterType="Long" resultType="io.bigtreelab.rndbox.api.domain.user.User"> 
 	SELECT u.user_no,

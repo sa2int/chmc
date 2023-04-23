@@ -4,6 +4,7 @@ import io.bigtreelab.rndbox.api.domain.md.MdCody;
 import io.bigtreelab.rndbox.api.domain.md.MdCodyDetail;
 import io.bigtreelab.rndbox.api.dto.Category.CategoryDto;
 import io.bigtreelab.rndbox.api.dto.md.*;
+import io.bigtreelab.rndbox.api.repository.MdChoiceRepository;
 import io.bigtreelab.rndbox.api.repository.MdCodyDetailRepository;
 import io.bigtreelab.rndbox.api.repository.MdCodyRepository;
 import io.bigtreelab.rndbox.api.repository.MdRepository;
@@ -23,10 +24,11 @@ public class MdService {
     private final MdRepository mdRepository;
     private final MdCodyRepository mdCodyRepository;
     private final MdCodyDetailRepository mdCodyDetailRepository;
+    private final MdChoiceRepository mdChoiceRepository;
 
     @Transactional
-    public MdDto.MdResponse saveMenu(MdDto.MdRequest mdRequest) {
-        return new MdDto.MdResponse(mdRepository.save(mdRequest.toEntity()));
+    public MdDto.Response saveMenu(MdDto.MdRequest mdRequest) {
+        return new MdDto.Response(mdRepository.save(mdRequest.toEntity()));
     }
 
     @Transactional
@@ -49,6 +51,12 @@ public class MdService {
                 .stream()
                 .map(MdQueryDslDto::new)
                 .collect(Collectors.toList());
+    }
+
+
+    @Transactional
+    public MdChoiceDto.Response saveMdChoice(MdChoiceDto.MdChoiceRequest mdChoiceRequest) {
+        return new MdChoiceDto.Response(mdChoiceRepository.save(mdChoiceRequest.toEntity()));
     }
 
 }

@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/actuator/health", "/*/common/**", "/*/poking/**", "/api/**", "/kakao/**", "/")
 				.permitAll() // 등록된 GET요청 리소스는 누구나 접근가능
 				.antMatchers("/*/MyPage/**").permitAll() // 가입 및 인증 주소는 누구나 접근가능
-				.antMatchers(HttpMethod.POST, "/*/order/**", "/*/user/log", "/api/**").permitAll() // 등록된 POST요청 리소스는 누구나 접근가능
+				.antMatchers(HttpMethod.POST, "/*/order/**", "/*/user/log", "/api/**", "/*/*/md/**").permitAll() // 등록된 POST요청 리소스는 누구나 접근가능
 				.anyRequest().hasRole("USER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
             .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())

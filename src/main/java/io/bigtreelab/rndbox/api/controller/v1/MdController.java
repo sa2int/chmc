@@ -2,14 +2,14 @@ package io.bigtreelab.rndbox.api.controller.v1;
 
 import io.bigtreelab.rndbox.api.dto.Category.CategoryDto;
 import io.bigtreelab.rndbox.api.dto.ResponseMsg;
-import io.bigtreelab.rndbox.api.dto.md.MdCodyRequestDto;
-import io.bigtreelab.rndbox.api.dto.md.MdDto;
-import io.bigtreelab.rndbox.api.dto.md.MdQueryDslDto;
-import io.bigtreelab.rndbox.api.dto.md.MdResponseDto;
+import io.bigtreelab.rndbox.api.dto.closet.ClosetDto;
+import io.bigtreelab.rndbox.api.dto.md.*;
 import io.bigtreelab.rndbox.api.service.CategoryService;
+import io.bigtreelab.rndbox.api.service.ClosetService;
 import io.bigtreelab.rndbox.api.service.MdService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +31,17 @@ import java.util.List;
 public class MdController {
 
     private final MdService mdService;
+    private final ClosetService closetService;
 
     @Autowired
     MessageSource messageSource;
 
-    @ApiOperation(value = "관리자 메뉴 추가")
+    @ApiOperation(value = "리스트 등록")
     @PostMapping("/md/post")
     public ResponseEntity<ResponseMsg> postMd(@RequestBody MdDto.MdRequest mdRequest,
                                               HttpServletRequest request) throws IOException {
         ResponseMsg msg = new ResponseMsg();
-        MdDto.MdResponse menu =  mdService.saveMenu(mdRequest);
+        MdDto.Response menu =  mdService.saveMenu(mdRequest);
 
         msg.setCode(messageSource.getMessage("reqSuccess.code", null, LocaleContextHolder.getLocale()));
         msg.setMsg(messageSource.getMessage("reqSuccess.msg", null, LocaleContextHolder.getLocale()));
@@ -50,7 +51,7 @@ public class MdController {
         return ResponseEntity.status(HttpStatus.OK).body(msg);
     }
 
-    @ApiOperation(value = "관리자 메뉴 추가")
+    @ApiOperation(value = "옷 추천")
     @PostMapping("/md/cody/post")
     public ResponseEntity<ResponseMsg> postMdCody(@RequestBody MdCodyRequestDto mdRequest,
                                               HttpServletRequest request) throws IOException {
@@ -76,6 +77,41 @@ public class MdController {
         msg.setCode(messageSource.getMessage("reqSuccess.code", null, LocaleContextHolder.getLocale()));
         msg.setMsg(messageSource.getMessage("reqSuccess.msg", null, LocaleContextHolder.getLocale()));
         msg.setData(category);
+        msg.setInstance(request.getRequestURI());
+
+//        msg = getMsg("reqSuccess", request, boxCodeList);
+//        msg.setInstance(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.OK).body(msg);
+    }
+
+    @ApiOperation(value = "옷 매칭")
+    @PostMapping("/md/choice/post")
+    public ResponseEntity<ResponseMsg> postMdChoice(@RequestBody MdChoiceDto.MdChoiceRequest mdChoiceRequest,
+                                              HttpServletRequest request) {
+        ResponseMsg msg = new ResponseMsg();
+        MdChoiceDto.Response menu =  mdService.saveMdChoice(mdChoiceRequest);
+
+        msg.setCode(messageSource.getMessage("reqSuccess.code", null, LocaleContextHolder.getLocale()));
+        msg.setMsg(messageSource.getMessage("reqSuccess.msg", null, LocaleContextHolder.getLocale()));
+        msg.setData(menu);
+        msg.setInstance(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.OK).body(msg);
+    }
+
+    @ApiOperation(value = "매칭 조회")
+    @GetMapping("/md/choice/{id}")
+    public ResponseEntity<ResponseMsg> getMdChoice(
+            @ApiParam(value = "휴대폰번호", example = "1", required = true) @PathVariable String id,
+            HttpServletRequest request) {
+        ResponseMsg msg = new ResponseMsg();
+
+        List<MdChoiceDto.Response> closet = closetService.getMdChoice(id);
+
+        msg.setCode(messageSource.getMessage("reqSuccess.code", null, LocaleContextHolder.getLocale()));
+        msg.setMsg(messageSource.getMessage("reqSuccess.msg", null, LocaleContextHolder.getLocale()));
+        msg.setData(closet);
         msg.setInstance(request.getRequestURI());
 
 //        msg = getMsg("reqSuccess", request, boxCodeList);
