@@ -1,13 +1,9 @@
-    public String solution(String need, String plan) {
-        String answer = "YES";
-        Queue<Character> q = new LinkedList<>();
+public String solution(int[] a, int b) {
 
-        for (char x : need.toCharArray()) q.offer(x);
-        for(char x : plan.toCharArray()) {
-            if(q.contains(x)) {
-                if(x != q.poll()) return "NO";
-            }
-            if(!q.isEmpty()) return "NO";
+//        int[] arr = Arrays.stream(a).distinct().toArray();
+        Arrays.sort(a);
+        for (int i = 0; i < b-1; i++) {
+                if (a[i] == a[i+1]) return "D";
         }
-        return answer;
+        return "U";
     }
