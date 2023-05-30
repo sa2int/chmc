@@ -1,13 +1,14 @@
-    public String solution(String need, String plan) {
-        String answer = "YES";
-        Queue<Character> q = new LinkedList<>();
-
-        for (char x : need.toCharArray()) q.offer(x);
-        for(char x : plan.toCharArray()) {
-            if(q.contains(x)) {
-                if(x != q.poll()) return "NO";
+    public int solution(int a, int[] b) {
+        int cnt = 0;
+        int[] dy = new int[a];
+        dy[0] = 1;
+        for (int i = 1; i < a; i++) {
+            int max = 0;
+            for (int j = i - 1; j >=0 ; j--) {
+                if(b[j] < b[i] && dy[j]>max) max = dy[j];
             }
-            if(!q.isEmpty()) return "NO";
+            dy[i] = max+1;
+            cnt = Math.max(cnt, dy[i]);
         }
-        return answer;
+        return cnt;
     }
