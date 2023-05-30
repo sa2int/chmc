@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="hidden" id="test_value" th:value="${code}" />
+<div id="test"></div>
+<script>
+    document.getElementById("test").innerText = document.getElementById("test_value").value;
+</script>
+</body>
+</html>
