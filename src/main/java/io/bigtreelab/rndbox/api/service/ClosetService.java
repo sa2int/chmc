@@ -1,19 +1,18 @@
 package io.bigtreelab.rndbox.api.service;
 
+
 import io.bigtreelab.rndbox.api.dto.closet.ClosetDto;
 import io.bigtreelab.rndbox.api.dto.md.MdChoiceDto;
-import io.bigtreelab.rndbox.api.dto.md.MdQueryDslDto;
 import io.bigtreelab.rndbox.api.repository.ClosetRepository;
 import io.bigtreelab.rndbox.api.repository.MdChoiceRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
+
 @RequiredArgsConstructor
 @Service
 public class ClosetService {

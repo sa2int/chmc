@@ -1,10 +1,10 @@
 package io.bigtreelab.rndbox.api.controller.v1;
 
-import io.bigtreelab.rndbox.api.dto.Category.CategoryDto;
+
 import io.bigtreelab.rndbox.api.dto.ResponseMsg;
-import io.bigtreelab.rndbox.api.dto.closet.ClosetDto;
+
 import io.bigtreelab.rndbox.api.dto.md.*;
-import io.bigtreelab.rndbox.api.service.CategoryService;
+
 import io.bigtreelab.rndbox.api.service.ClosetService;
 import io.bigtreelab.rndbox.api.service.MdService;
 import io.swagger.annotations.Api;

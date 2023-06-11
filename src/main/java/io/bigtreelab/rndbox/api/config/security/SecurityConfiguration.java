@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/*/signin", "/*/signin/**", "/*/reissue", "/*/signup", "/*/signup/**", "/social/**", "/*/user/log")
 				.permitAll() // 가입 및 인증 주소는 누구나 접근가능
 				.antMatchers(HttpMethod.GET, "/exception/**", "/hello/**", "/*/display/**", "/*/product/**",
-						"/actuator/health", "/*/common/**", "/*/poking/**", "/api/**", "/kakao/**", "/")
+						"/actuator/health", "/*/common/**", "/*/poking/**", "/api/**", "/kakao/**", "/", "/kakao/success1/", "/google", "/googleSuccess", "/googleSuccess2")
 				.permitAll() // 등록된 GET요청 리소스는 누구나 접근가능
 				.antMatchers("/*/MyPage/**").permitAll() // 가입 및 인증 주소는 누구나 접근가능
 				.antMatchers(HttpMethod.POST, "/*/order/**", "/*/user/log", "/api/**", "/*/*/md/**").permitAll() // 등록된 POST요청 리소스는 누구나 접근가능
